@@ -42,3 +42,6 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 rosbuild_add_library(${PROJECT_NAME} src/AprilDotGridDetector.cpp)
 target_link_libraries(${PROJECT_NAME} apriltags ${OpenCV_LIBS})
+
+rosbuild_add_executable(aslam_fiducials_node src/aslam_fiducials_node.cpp)
+target_link_libraries(aslam_fiducials_node ${PROJECT_NAME} apriltags ${OpenCV_LIBS})
