@@ -1,0 +1,17 @@
+<package>
+  <description brief="aslam_fiducials">
+
+     aslam_fiducials
+
+  </description>
+  <author>Paul Furgale</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/aslam_fiducials</url>
+
+  <depend package="aslam_cameras"/>
+  <depend package="opencv2"/>
+
+</package>
+
+
