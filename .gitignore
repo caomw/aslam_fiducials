@@ -1,0 +1,7 @@
+aslam_fiducials/build/
+aslam_fiducials/include/
+aslam_fiducials/lib/
+aslam_fiducials/src/
+aslam_fiducials/bin/
+*.pyc
+*~
