@@ -14,7 +14,7 @@
 
 
 namespace aslam {
-    
+
     class AprilDotGridDetector
     {
     public:
@@ -29,10 +29,10 @@ namespace aslam {
         bool findTarget(const cv::Mat & image, cameras::GridCalibrationTargetObservation & outObservation);
 
         // this function is just for convenience.
-        bool findTargetEigen(const Eigen::Matrix<boost::uint8_t, Eigen::Dynamic, Eigen::Dynamic> & image, 
+        bool findTargetEigen(const Eigen::Matrix<boost::uint8_t, Eigen::Dynamic, Eigen::Dynamic> & image,
                              cameras::GridCalibrationTargetObservation & outObservation);
 
-    
+
     private:
         boost::shared_ptr<AprilTags::TagDetector> _tagDetector;
         AprilTags::TagCodes _tagCodes;
@@ -42,9 +42,9 @@ namespace aslam {
         // see aslam_cameras/include/aslam/cameras/GridCalibrationTarget.hpp
         // boost::shared_ptr<aslam::cameras::GridCalibrationTarget> _target
 
-        
+
     };
-    
+
 
 } // namespace aslam
 

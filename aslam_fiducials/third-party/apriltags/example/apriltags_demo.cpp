@@ -253,7 +253,7 @@ public:
       v4l2_set_control(device, V4L2_CID_BRIGHTNESS, m_brightness*256);
     }
     v4l2_close(device);
-#endif 
+#endif
 
     // find and open a USB camera (built in laptop camera, web cam etc)
     m_cap = cv::VideoCapture(m_deviceId);
