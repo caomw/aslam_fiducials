@@ -1,8 +1,10 @@
 
 #include "opencv2/opencv.hpp"
 
+
 #include "TagDetection.h"
 #include "MathUtil.h"
+#include "GLine2D.h"
 
 #ifdef PLATFORM_APERIOS
 //missing/broken isnan
@@ -18,7 +20,7 @@ namespace std {
 
 namespace AprilTags {
 
-TagDetection::TagDetection() 
+TagDetection::TagDetection()
   : good(false), obsCode(), code(), id(), hammingDistance(), rotation(), p(),
     cxy(), observedPerimeter(), homography(), hxy() {
   homography.setZero();
@@ -103,7 +105,7 @@ Eigen::Matrix4d TagDetection::getRelativeTransform(double tag_size, double fx, d
   Eigen::Matrix3d wRo;
   wRo << r(0,0), r(0,1), r(0,2), r(1,0), r(1,1), r(1,2), r(2,0), r(2,1), r(2,2);
 
-  Eigen::Matrix4d T; 
+  Eigen::Matrix4d T;
   T.topLeftCorner(3,3) = wRo;
   T.col(3).head(3) << tvec.at<double>(0), tvec.at<double>(1), tvec.at<double>(2);
   T.row(3) << 0,0,0,1;
@@ -139,11 +141,18 @@ void TagDetection::draw(cv::Mat& image) const {
   std::pair<float, float> p3 = p[2];
   std::pair<float, float> p4 = p[3];
 
+
+
   // plot outline
   cv::line(image, cv::Point2f(p1.first, p1.second), cv::Point2f(p2.first, p2.second), cv::Scalar(255,0,0,0) );
   cv::line(image, cv::Point2f(p2.first, p2.second), cv::Point2f(p3.first, p3.second), cv::Scalar(0,255,0,0) );
   cv::line(image, cv::Point2f(p3.first, p3.second), cv::Point2f(p4.first, p4.second), cv::Scalar(0,0,255,0) );
   cv::line(image, cv::Point2f(p4.first, p4.second), cv::Point2f(p1.first, p1.second), cv::Scalar(255,0,255,0) );
+
+
+
+  //GLine2D(p5, p6);
+  //cv::line(image, cv::Point2f(p5.first, p5.second), cv::Point2f(p6.first, p6.second), cv::Scalar(0,0,0,255));
 
   // mark center
   cv::circle(image, cv::Point2f(cxy.first, cxy.second), 8, cv::Scalar(0,0,255,0), 2);

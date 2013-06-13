@@ -48,3 +48,6 @@ target_link_libraries(aslam_fiducials_node ${PROJECT_NAME} apriltags ${OpenCV_LI
 
 rosbuild_add_executable(extractor_test src/extractor_test.cpp)
 target_link_libraries(extractor_test ${OpenCV_LIBS})
+
+rosbuild_add_executable(test_dots src/test_dots.cpp)
+target_link_libraries(test_dots ${OpenCV_LIBS})
