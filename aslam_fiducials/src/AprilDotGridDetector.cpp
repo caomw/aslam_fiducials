@@ -41,20 +41,31 @@ namespace aslam {
         return pt1;
     }
 */
+    static float norme(std::pair<float,float> u)
+    {
+        float p = 0 ;
+
+        float dx = u.first;
+        float dy = u.second;
+        p = std::sqrt(dx*dx + dy*dy);
+
+}
+
     static int FindNextPoint(std::pair<float,float> p, std::pair<float,float> v , std::vector<cv::KeyPoint> vect)
     {
         int i=0, j=0;
-        float dist;
+        float dist, norm;
         std::pair<float,float> pn;
         pn.first = p.first + v.first;
         pn.second = p.second + v.second;
+        norm = std::sqrt(v.first*v.first + v.second*v.second);
         for(i=0 ; i<vect.size() ; i++)
         {
             cv::KeyPoint pts = vect[i];
             float dx = pn.first - pts.pt.x;
             float dy = pn.second - pts.pt.y;
             dist = std::sqrt(dx*dx + dy*dy);
-            if(dist < 10)
+            if(dist < norm/3.0)
             {
                 j = i;
                 break;
@@ -162,33 +173,22 @@ namespace aslam {
          {
             AprilTags::TagDetection corners = detectedTags[0];
             std::pair<float,float> p1 = corners.interpolate(0,0);
-       //     std::pair<float,float> p11 = corners.interpolate(-0.5,-1);
-       //     std::pair<float,float> p12 = corners.interpolate(0.5,-1);
-            ////////////////////////////
+
             std::pair<float,float> p2 = corners.interpolate(0,0.5);
-        //    std::pair<float,float> p21 = corners.interpolate(-0.5,-1);
-       //     std::pair<float,float> p22 = corners.interpolate(0.5,-1);
-            ////////////////////////////
-            std::pair<float,float> p3 = corners.interpolate(-1,0);
-       //     std::pair<float,float> p31 = corners.interpolate(-1,-0.5);
-       //     std::pair<float,float> p32 = corners.interpolate(-1,0.5);
-            ////////////////////////////
-            std::pair<float,float> p4 = corners.interpolate(1,0);
-      //      std::pair<float,float> p41 = corners.interpolate(1,-0.5);
-     // /      std::pair<float,float> p42 = corners.interpolate(1,0.5);
-     //       cv::circle(colorImage, cv::Point(p1.first, p1.second), 5, cv::Scalar(0,255,0,0), -1);
-     //       cv::circle(colorImage, cv::Point(p2.first, p2.second), 5, cv::Scalar(255,255,0,0), -1);
+
+
+
 
           //  cv::KeyPoint pt1 = blobs[0];
          //   cv::circle(colorImage, cv::Point(pt1.pt.x, pt1.pt.y), 5, cv::Scalar(0,255,255,0), -1);
            // dist1 = AprilTags::MathUtil::distance2D(p1, p2);
            // dist2 = dist1/5.0;
             std::pair<float,float> pp1 = corners.interpolate(0,1);
-            std::pair<float,float> V1;
-            V1.first = pp1.first - p1.first;
-            V1.second = pp1.second - p1.second;
-            //V1.first = V.first * ((0.2+1.1)/1.1);
-            //V1.second = V.second * ((0.2+1.1)/1.1);
+            std::pair<float,float> V1,V;
+            V.first = pp1.first - p2.first;
+            V.second = pp1.second - p2.second;
+            V1.first = V.first * 2;
+            V1.second = V.second * 2 ;
             std::vector<int> Dots = find_all_points(p2, V1, blobs, colorImage);
             //std::vector<int> Dots = find_all_points(pp2, V1, blobs, colorImage);
 
@@ -385,27 +385,6 @@ namespace aslam {
 */
 
 
-         //  cv::circle(colorImage, cv::Point(p2.first, p2.second - dist2), 5, cv::Scalar(255,255,255,255), -1);
-         //   int result = blobs.size();
-         //   if( !blobs.empty() )
-          //  {
-          //      for(i=0; i<result; i++)
-         //       {
-
-         //               std::pair<float,float> p3;
-        //                p3.first = blobs[i].pt.x;
-        //                p3.second = blobs[i].pt.y;
-        //                if(AprilTags::MathUtil::distance2D(p3, p2) < dist2)
-         //               {
-         //                   pt1 = blobs[i];
-         //                   cv::circle(colorImage, cv::Point(pt1.pt.x, pt1.pt.y), 5, cv::Scalar(0,255,255,0), -1);
-
-         //               }
-
-
-              //  }
-
-            //}
 
 
 
