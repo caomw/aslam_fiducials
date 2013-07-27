@@ -3,3 +3,14 @@ aslam_fiducials/lib/
 aslam_fiducials/bin/
 *.pyc
 *~
+*~
+#*
+bin
+build
+lib
+*.o
+*.so
+*.pyc
+.project
+.cproject
+.pydevproject
